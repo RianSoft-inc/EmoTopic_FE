@@ -34,7 +34,7 @@ export default function MainSelectPage() {
         style={{ paddingBottom: 0 }}
       />
       {/* 박스 네개 container */}
-      <div className="flex justify-center px-20">
+      <div className="flex justify-center px-44">
         <div className="w-1/2 flex flex-col justify-center">
           <SelectUserStartContainer
             click={first}

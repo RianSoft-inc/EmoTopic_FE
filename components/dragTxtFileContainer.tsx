@@ -76,17 +76,18 @@ export default function FileUpload({
             }}
             className={`${
               fileEnter ? "border-4" : "border-2"
-            } bg-white flex flex-col w-72 h-72 p-15 border-dashed items-center justify-center
+            } bg-white flex flex-col w-72 h-72 p-15 border-dashed border-4 items-center justify-center
             dark:bg-gray-900 dark:bg-opacity-60 dark:backdrop-blur-md shadow-lg
      shadow-black/10 ring-2 ring-transparent 
-       hover:ring-indigo-400 rounded-2xl m-10`}
-            //mx-auto
+       hover:border-indigo-400 hover:cursor-pointer rounded-2xl m-10`}
           >
             <label
               htmlFor="file"
               className="flex flex-col justify-center text-center gap-3 hover:cursor-pointer"
             >
-              <i className="fa-solid fa-copy"></i>
+              <span className="text-gray-200 hover:text-indigo-400">
+                <i className="fa-regular fa-file fa-2x "></i>
+              </span>
               {fileContent === ""
                 ? "txt 파일을 올려주세요"
                 : "파일 업로드 성공"}
