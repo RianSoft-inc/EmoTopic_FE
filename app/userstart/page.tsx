@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
-import SelectUserStartContainer from "@/components/selectUserStartContainer";
-import SelectInformContainer from "@/components/selectInformContainer";
 import FileUpload from "@/components/dragTxtFileContainer";
 import Title from "@/components/title";
+import CollapseMenu from "@/components/collapseMenu";
 export default function MainSelectPage() {
   const [first, SetFirst] = useState(false);
   const [inform, Setinform] = useState(false);
@@ -36,14 +35,7 @@ export default function MainSelectPage() {
       {/* 박스 네개 container */}
       <div className="flex justify-center px-44">
         <div className="w-1/2 flex flex-col justify-center">
-          <SelectUserStartContainer
-            click={first}
-            setClick={onfirstClick}
-          ></SelectUserStartContainer>
-          <SelectInformContainer
-            click={inform}
-            setClick={oninformClick}
-          ></SelectInformContainer>
+          <CollapseMenu />
         </div>
         <div className="w-1/2 flex flex-col items-center ">
           <FileUpload

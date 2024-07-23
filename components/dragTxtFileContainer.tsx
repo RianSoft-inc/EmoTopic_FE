@@ -75,8 +75,9 @@ export default function FileUpload({
               handleDrop(e);
             }}
             className={`${
+              // 파일 끌어오는 box
               fileEnter ? "border-4" : "border-2"
-            } bg-white flex flex-col w-72 h-72 p-15 border-dashed border-4 items-center justify-center
+            } bg-white flex flex-col w-80 h-60 p-15 border-dashed border-4 items-center justify-center
             dark:bg-gray-900 dark:bg-opacity-60 dark:backdrop-blur-md shadow-lg
      shadow-black/10 ring-2 ring-transparent 
        hover:border-indigo-400 hover:cursor-pointer rounded-2xl m-10`}
@@ -86,6 +87,7 @@ export default function FileUpload({
               className="flex flex-col justify-center text-center gap-3 hover:cursor-pointer"
             >
               <span className="text-gray-200 hover:text-indigo-400">
+                {/* 파일 아이콘 */}
                 <i className="fa-regular fa-file fa-2x "></i>
               </span>
               {fileContent === ""
