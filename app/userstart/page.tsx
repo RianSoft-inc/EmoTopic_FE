@@ -54,7 +54,7 @@ export default function MainSelectPage() {
         crossOrigin="anonymous"
         referrerPolicy="no-referrer"
       />
-      <script src="https://cdn.tailwindcss.com/3.3.3"></script>
+      <script src="https://cdn.tailwindcss.com/3.3.3" async></script>
       {/* 타이틀 */}
       <Title
         h1={"이모토픽 분석 시작하기"}

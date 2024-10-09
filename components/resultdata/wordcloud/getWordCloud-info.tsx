@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function WordCloudInfo({ data }: { data: any }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -51,7 +52,7 @@ export default function WordCloudInfo({ data }: { data: any }) {
   return (
     <div>
       {imageUrl ? (
-        <img src={imageUrl} alt="워드 클라우드" />
+        <Image src={imageUrl} alt="워드 클라우드" width={500} height={500} />
       ) : (
         <p>이미지를 불러오는 중입니다...</p>
       )}
