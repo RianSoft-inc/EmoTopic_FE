@@ -4,11 +4,20 @@ import KeywordInfo from "@/components/resultdata/keyword/getKeyword-info";
 import ParticipantsInfo from "@/components/resultdata/participants/getParticipants-info";
 import TimelineInfo from "@/components/resultdata/timeline/getTimeline-info";
 import WordCloudInfo from "@/components/resultdata/wordcloud/getWordCloud-info";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import React from "react";
 
 export default function Resultpage() {
+  return (
+    <Suspense fallback={<p>로딩 중...</p>}>
+      <ResultpageContent />
+    </Suspense>
+  );
+}
+
+function ResultpageContent() {
   const searchParams = useSearchParams();
   const stringResult = searchParams.get("result");
   const [objResult, setObjResult] = useState(null);
