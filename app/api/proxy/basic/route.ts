@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
-export const bodyParser = { bodyParser: false };
 
 // ⬇️ Next.js 13 버전
 // export const config = {
