@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "nodejs";
+export const bodyParser = { bodyParser: false };
 
-export const config = {
-  api: {
-    bodyParser: false, // 파일 업로드 등에서 body를 직접 처리하기 위한 설정
-  },
-};
+// ⬇️ Next.js 13 버전
+// export const config = {
+//   api: {
+//     bodyParser: false, // 파일 업로드 등에서 body를 직접 처리하기 위한 설정
+//   },
+// };
 
 export async function POST(request: NextRequest) {
   try {
