@@ -14,8 +14,8 @@ export default function MainSelectPage() {
       />
       <div className="flex justify-center items-center h-80 m-10 gap-10">
         <SelectContainer src={Userimg} name="일반 사용자" link="/userstart" />
-        <SelectContainer src={counselorimg} name="연구원" link="#" />
-        <SelectContainer src={researcherimg} name="상담사" link="#" />
+        <SelectContainer src={researcherimg} name="연구원" link="/login" />
+        <SelectContainer src={counselorimg} name="상담사" link="#" />
       </div>
     </>
   );

@@ -50,9 +50,9 @@ export default function WordCloudInfo({ data }: { data: any }) {
   }
 
   return (
-    <div>
+    <div className="flex justify-center my-20">
       {imageUrl ? (
-        <Image src={imageUrl} alt="워드 클라우드" width={500} height={500} />
+        <Image src={imageUrl} alt="워드 클라우드" width={350} height={350} />
       ) : (
         <p>이미지를 불러오는 중입니다...</p>
       )}

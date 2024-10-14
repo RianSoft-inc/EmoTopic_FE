@@ -16,10 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <div className={`${inter.className} h-full flex flex-col`}>
-          {children}
-        </div>
+      <body className="min-h-screen flex flex-col justify-between">
+        <div className={`${inter.className} flex-grow`}>{children}</div>
+        {/* Footer 추가 */}
+        <footer className="bg-slate-600 text-white text-center py-4">
+          <p>&copy; 2024 Riansoft. All rights reserved.</p>
+          <p></p>
+        </footer>
       </body>
     </html>
   );

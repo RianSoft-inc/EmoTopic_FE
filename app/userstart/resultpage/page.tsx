@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import React from "react";
+import Link from "next/link";
 
 export default function Resultpage() {
   return (
@@ -48,6 +49,12 @@ function ResultpageContent() {
         </>
       )}
       {!objResult && <p>결과를 불러오는 중입니다...</p>}
+      <Link
+        href="/userstart"
+        className="px-5 py-3 bg-purple-200 hover:bg-purple-500 hover:text-white text-md font-semibold rounded-md"
+      >
+        다시 분석하기
+      </Link>
     </div>
   );
 }
