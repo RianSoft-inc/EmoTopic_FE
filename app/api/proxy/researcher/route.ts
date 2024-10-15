@@ -1,89 +1,52 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// JWT 토큰 검증 함수 (실제 서버에서 검증 로직을 대체해야 함)
-function verifyToken(token: string) {
-  console.log("토큰 검증 시작:", token);
-  if (token) {
-    return true; // 실제 서버에서는 토큰 유효성을 검증해야 함
-  }
-  return false;
-}
+export const runtime = "nodejs";
+export const maxDuration = 900; // 최대 실행 시간 15분
 
-// CSV 데이터를 JSON으로 변환하는 함수
-function csvToJson(csv: string) {
-  const lines = csv.split("\n");
-  const result = [];
-  const headers = lines[0].split(",");
+export async function POST(request: NextRequest) {
+  try {
+    const contentType = request.headers.get("content-type") || "";
 
-  for (let i = 1; i < lines.length; i++) {
-    const obj: any = {};
-    const currentline = lines[i].split(",");
+    // 요청 바디를 ArrayBuffer로 읽어오기
+    const bodyArrayBuffer = await request.arrayBuffer();
+    const bodyBuffer = Buffer.from(bodyArrayBuffer);
 
-    headers.forEach((header, index) => {
-      obj[header.trim()] = currentline[index]?.trim() ?? ""; // 빈값 체크 추가
+    // 외부 API로 요청 전달
+    const externalApiUrl = "https://api.flow-talk.com/api/researcher"; // 외부 API 주소
+    const response = await fetch(externalApiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": contentType,
+      },
+      body: bodyBuffer,
     });
 
-    result.push(obj);
-  }
-
-  return result;
-}
-
-export async function POST(request: Request) {
-  try {
-    console.log("요청 수신, 헤더 확인 시작");
-    const authHeader = request.headers.get("Authorization");
-
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!response.ok) {
       console.error(
-        "Authorization 헤더가 없거나 형식이 잘못되었습니다:",
-        authHeader
+        "외부 API 요청 실패:",
+        response.status,
+        response.statusText
       );
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json(
+        {
+          error: "외부 API 오류",
+          status: response.status,
+          details: response.statusText,
+        },
+        { status: response.status }
+      );
     }
 
-    const token = authHeader.split(" ")[1];
-    const isValid = verifyToken(token);
+    // 외부 API에서 JSON 응답을 받아서 그대로 반환
+    const jsonResult = await response.json();
 
-    if (!isValid) {
-      console.error("유효하지 않은 토큰:", token);
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
-    }
-
-    console.log("토큰 유효성 검증 완료, 파일 처리 시작");
-
-    const formData = await request.formData();
-    const file = formData.get("file") as File;
-
-    if (!file) {
-      console.error("파일이 업로드되지 않았습니다.");
-      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
-    }
-
-    const fileContents = await file.text();
-    console.log("파일 내용 읽기 성공:", fileContents);
-
-    // CSV 파일을 JSON으로 변환
-    const jsonData = csvToJson(fileContents);
-    console.log("CSV 변환된 JSON:", jsonData);
-
+    // 응답 반환
+    return NextResponse.json(jsonResult, { status: 200 });
+  } catch (error: any) {
+    console.error("Proxy error:", error);
     return NextResponse.json(
-      { message: "파일 분석 완료", fileName: file.name, data: jsonData },
-      { status: 200 }
+      { error: "Internal Server Error", details: error.message },
+      { status: 500 }
     );
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error("서버 오류 발생:", error.message);
-      return NextResponse.json(
-        { error: "Internal server error", details: error.message },
-        { status: 500 }
-      );
-    } else {
-      console.error("예상치 못한 서버 오류 발생:", error);
-      return NextResponse.json(
-        { error: "Internal server error" },
-        { status: 500 }
-      );
-    }
   }
 }

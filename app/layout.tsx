@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/navBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +17,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col justify-between">
-        <div className={`${inter.className} flex-grow`}>{children}</div>
-        {/* Footer 추가 */}
-        <footer className="bg-slate-600 text-white text-center py-4">
-          <p>&copy; 2024 Riansoft. All rights reserved.</p>
-          <p></p>
+      <body className="flex flex-col h-screen justify-center">
+        {/* Navbar */}
+        <Navbar />
+
+        {/* Main Content */}
+        <div className={`${inter.className} flex-grow py-16 px-10`}>
+          {children}
+        </div>
+
+        {/* Footer */}
+        <footer className=" bg-gray-300 text-white text-center py-4 w-full">
+          <p>&copy; 2024 RianSoft 리안소프트. All rights reserved.</p>
         </footer>
       </body>
     </html>

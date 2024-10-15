@@ -113,7 +113,7 @@ function CustomDropzone({ fileType, onFileSelect }: CustomDropzoneProps) {
       onMouseLeave={handleMouseLeave}
       onClick={handleClick} // div 클릭 시 파일 선택 트리거
       className={`border-2 ${
-        isDragOver || isHover ? "border-purple-400" : "border-gray-300"
+        isDragOver || isHover ? "border-blue-400" : "border-gray-300"
       } border-dashed rounded-lg p-10 text-center transition-colors duration-300 flex flex-col items-center`}
       style={{
         backgroundColor: isDragOver || isHover ? "#fafafa" : "#ffffff",

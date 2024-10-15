@@ -47,7 +47,7 @@ export default function LoginPage() {
 
   return (
     <Suspense fallback={<p>로딩 중...</p>}>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-gray-50 rounded-sm">
         <div className="bg-white p-10 rounded-lg shadow-lg max-w-md w-full">
           <h2 className="text-2xl font-bold mb-5 text-center">로그인</h2>
           <form onSubmit={handleLogin}>
@@ -61,7 +61,7 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div className="mb-6 relative">
@@ -74,11 +74,11 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="relative w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {/* 눈 모양 아이콘 */}
               <div
-                className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+                className="absolute top-10 right-3 flex items-center cursor-pointer text-gray-500"
                 onClick={togglePasswordVisibility}
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -91,8 +91,8 @@ export default function LoginPage() {
               <button
                 type="submit"
                 className={`${
-                  isPending ? "bg-gray-400" : "bg-purple-500"
-                } text-white font-bold py-2 px-4 rounded hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 w-full`}
+                  isPending ? "bg-gray-400" : "bg-blue-400"
+                } text-white font-bold py-2 px-4 rounded hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full`}
                 disabled={isPending} // 로딩 중일 때 버튼 비활성화
               >
                 {buttonText}
